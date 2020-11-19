@@ -35,8 +35,12 @@ import java.awt.image.BufferedImage;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
+
 import javax.swing.JTextField;
 
 
@@ -65,8 +69,9 @@ public class Programs extends JFrame implements ActionListener {
 	private JButton btnNewButton_6_1;
 	private JButton btnNewButton_6_2;
 	private JButton btnNewButton_14;
-	private JLabel lblNewLabel_3;
+	private JLabel lbltg;
 	private JLabel lblNewLabel_4;
+	private JButton btnNewButton_15;
 	
 	
 
@@ -124,25 +129,29 @@ public class Programs extends JFrame implements ActionListener {
 //		Image image = new ImageIcon(getClass().getResource("/Game/icon/icon" + random + ".jpg")).getImage();
 //		Icon icon = new ImageIcon(image.getScaledInstance(width, height, image.SCALE_SMOOTH));
 		
+		Random rand = new Random();
+		int randomNum = rand.nextInt((9 - 0) + 1) + 0;
+		
+		
 		JButton btnNewButton = new JButton("");
 		btnNewButton.setBounds(10, 22, 208, 157);
 		btnNewButton.setIcon(new ImageIcon("Resources/" + random + ".jpg"));
 		btnNewButton.setBorder(null);
-		btnNewButton.setIcon(new ImageIcon(new ImageIcon("Resources/" + 1 + ".jpg").getImage().getScaledInstance(208, 157, Image.SCALE_SMOOTH)));
+		btnNewButton.setIcon(new ImageIcon(new ImageIcon("Resources/" + randomNum + ".jpg").getImage().getScaledInstance(208, 157, Image.SCALE_SMOOTH)));
 		panel_1.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("");
 		btnNewButton_1.setBounds(228, 22, 208, 157);
 		btnNewButton_1.setIcon(new ImageIcon("Resources/" + random + ".jpg"));
 		btnNewButton_1.setBorder(null);
-		btnNewButton_1.setIcon(new ImageIcon(new ImageIcon("Resources/" + 2 + ".jpg").getImage().getScaledInstance(208, 157, Image.SCALE_SMOOTH)));
+		btnNewButton_1.setIcon(new ImageIcon(new ImageIcon("Resources/" + randomNum + ".jpg").getImage().getScaledInstance(208, 157, Image.SCALE_SMOOTH)));
 		panel_1.add(btnNewButton_1);
 		
 		btnNewButton_2 = new JButton("");
 		btnNewButton_2.setBounds(446, 22, 212, 157);
 		btnNewButton_2.setIcon(new ImageIcon("Resources/" + random + ".jpg"));
 		btnNewButton_2.setBorder(null);
-		btnNewButton_2.setIcon(new ImageIcon(new ImageIcon("Resources/" + 3+ ".jpg").getImage().getScaledInstance(208, 157, Image.SCALE_SMOOTH)));
+		btnNewButton_2.setIcon(new ImageIcon(new ImageIcon("Resources/" + randomNum+ ".jpg").getImage().getScaledInstance(208, 157, Image.SCALE_SMOOTH)));
 		panel_1.add(btnNewButton_2);
 		
 		btnNewButton_3 = new JButton("");
@@ -222,23 +231,23 @@ public class Programs extends JFrame implements ActionListener {
 		contentPane.add(btnNewButton_8);
 		
 		btnNewButton_9 = new JButton("CHƠI LẠI");
-		btnNewButton_9.setBounds(780, 606, 89, 42);
+		btnNewButton_9.setBounds(782, 657, 89, 42);
 		contentPane.add(btnNewButton_9);
 		
 		btnNewButton_10 = new JButton("TẠM DỪNG");
-		btnNewButton_10.setBounds(890, 606, 103, 42);
+		btnNewButton_10.setBounds(890, 657, 103, 42);
 		contentPane.add(btnNewButton_10);
 		
 		btnNewButton_11 = new JButton("GIẢI BFS");
-		btnNewButton_11.setBounds(1023, 606, 89, 42);
+		btnNewButton_11.setBounds(1014, 657, 89, 42);
 		contentPane.add(btnNewButton_11);
 		
 		btnNewButton_12 = new JButton("GIẢI TỐI ƯU");
-		btnNewButton_12.setBounds(1142, 606, 103, 42);
+		btnNewButton_12.setBounds(1124, 657, 103, 42);
 		contentPane.add(btnNewButton_12);
 		
 		btnNewButton_13 = new JButton("THOÁT");
-		btnNewButton_13.setBounds(1255, 604, 89, 42);
+		btnNewButton_13.setBounds(1249, 657, 89, 42);
 		contentPane.add(btnNewButton_13);
 		
 		JLabel lblNewLabel = new JLabel("SỐ BƯỚC DUYỆT");
@@ -254,19 +263,28 @@ public class Programs extends JFrame implements ActionListener {
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblDongHo = new JLabel();
+		lblDongHo.setFont(new Font("Times New Roman", Font.BOLD, 32));
+		lblDongHo.setText("             00 : 00 : 00");
 		lblDongHo.setBounds(862, 412, 328, 60);
 		contentPane.add(lblDongHo);
 		
-		lblNewLabel_3 = new JLabel("New label");
-		lblNewLabel_3.setBounds(1020, 483, 235, 36);
-		contentPane.add(lblNewLabel_3);
+		lbltg = new JLabel("00 : 00 : 00 ms");
+		lbltg.setFont(new Font("Times New Roman", Font.BOLD, 22));
+		lbltg.setForeground(Color.BLACK);
+		lbltg.setBounds(1020, 483, 235, 36);
+		contentPane.add(lbltg);
 		
 		lblNewLabel_4 = new JLabel("");
 		lblNewLabel_4.setBounds(138, 604, 62, 42);
 		contentPane.add(lblNewLabel_4);
 		
+		btnNewButton_15 = new JButton("BẮT ĐẦU");
+		btnNewButton_15.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		btnNewButton_15.setBounds(960, 583, 235, 60);
+		contentPane.add(btnNewButton_15);
 		
-		setSize(1650,800);
+		
+		setSize(1650,750);
 		setTitle("Game xếp hình");
 		setLocationRelativeTo(null);
 		
@@ -285,7 +303,14 @@ public class Programs extends JFrame implements ActionListener {
 		if(o.equals(btnNewButton_10)) {
 			
 		}
+		if (o.equals(btnNewButton_15)) {
+			if (lbltg.getText() !="00 : 00 : 00") {
+				int n=JOptionPane.showConfirmDialog(this, "Bạn Có Muốn Chơi Lại", "Chơi Lại", JOptionPane.YES_NO_OPTION);
+				if (n==JOptionPane.YES_OPTION) {
+					
+				}
+			}
+		}
 		
 	}
-
 }
